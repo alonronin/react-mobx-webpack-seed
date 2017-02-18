@@ -1,0 +1,13 @@
+button {
+    padding: 20px;
+    background: darken(#eaeaea, 10%);
+    color: #333;
+    border: 0;
+    border-radius: 20px;
+    transition: all 500ms;
+    font-size: responsive;
+
+    &:hover {
+      background: #cacaca;
+    }
+}
