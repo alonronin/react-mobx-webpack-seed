@@ -1,4 +1,4 @@
-const path = require('path');
+const { resolve } = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const rucksack = require('rucksack-css');
@@ -17,37 +17,73 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve('./dist'),
+    path: resolve('./dist'),
+    filename: 'js/[name].js',
     //publicPath: `/`
   },
 
-  context: path.resolve(__dirname, 'src'),
+  context: resolve(__dirname, 'src'),
+
+  devtool: 'inline-source-map',
 
   module: {
-    loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' },
-      { test: /\.html$/, loader: 'html' },
-      { test: /\.json$/, loader: 'json' }
-    ],
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        enforce: 'pre',
+        use: [
+          {
+            loader: 'eslint-loader',
+            options: {
+              configFile: './.eslintrc',
+              failOnError: false,
+              cache: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.s?css$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader?sourceMap&importLoaders=1' },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function () {
+                return [
+                  require('postcss-import')(),
+                  require('postcss-mixins')(),
+                  require('postcss-simple-vars')(),
+                  require('postcss-nested')(),
 
-    noParse: []
+                  rucksack({
+                    autoprefixer: true
+                  })
+                ]
+              }
+            }
+
+          }
+        ]
+      },
+      {
+        test: /\.(woff2?|ttf|svg|eot|jpg|png|gif)?(\?.+)?$/,
+        use: 'url-loader'
+      },
+      { test: /\.html$/, loader: 'html-loader' }
+    ]
   },
 
   resolve: {
-    extensions: ['', '.js', '.jsx'],
-    alias: {}
+    extensions: ['.js', '.jsx']
   },
-
-  postcss: [
-    require('postcss-import')(),
-    require('postcss-mixins')(),
-    require('postcss-simple-vars')(),
-    require('postcss-nested')(),
-
-    rucksack({
-      autoprefixer: true
-    })
-  ],
 
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({

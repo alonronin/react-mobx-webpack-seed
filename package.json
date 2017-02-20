@@ -18,7 +18,7 @@
     "lint-fix": "npm run lint -- --fix",
     "prebuild": "npm run clean && npm run lint",
     "recommend-bump": "conventional-recommended-bump -p angular",
-    "start": "webpack-dev-server --config webpack.config.dev.js -d --open --history-api-fallback --hot --inline --progress --colors --content-base ./dist --port 8100",
+    "start": "webpack-dev-server --config webpack.config.js -d --open --history-api-fallback --hot --inline --progress --colors --content-base ./dist --port 8100",
     "start-autofix": "cross-env autofix='true' npm run start",
     "test": "mocha --opts mocha.opts"
   },
@@ -53,7 +53,6 @@
     "html-webpack-plugin": "^2.24.1",
     "ignore-styles": "^5.0.1",
     "jsdom": "^9.8.3",
-    "json-loader": "^0.5.4",
     "mobx-react-devtools": "^4.2.9",
     "mocha": "^3.1.2",
     "nyc": "^10.0.0",
@@ -69,8 +68,8 @@
     "style-loader": "^0.13.1",
     "trash-cli": "^1.4.0",
     "url-loader": "^0.5.7",
-    "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.3"
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
   },
   "dependencies": {
     "bluebird": "^3.4.6",

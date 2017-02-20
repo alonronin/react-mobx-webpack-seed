@@ -8,7 +8,7 @@ const config = require('./webpack.config');
 config.output = {
   path: path.join('dist', pkg.version),
   filename: 'js/[name].[hash].js',
-  publicPath: `/${pkg.name}/${pkg.version}/`
+  publicPath: `./${pkg.version}/`
 };
 
 config.output.filename = `js/[name].[hash].js`;
