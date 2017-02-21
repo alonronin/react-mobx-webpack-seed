@@ -1,7 +1,17 @@
-import store from './store';
-import {expect} from 'chai';
+import Store from './store';
+import sinon from 'sinon';
+import { expect } from 'chai';
 
 describe('Store', () => {
+  let store, clock;
+
+  beforeEach(() => {
+    clock = sinon.useFakeTimers();
+    store = new Store();
+  });
+
+  afterEach(() => clock.restore());
+
   it('is a class', () => {
     expect(store).to.be.a('object')
   });
@@ -13,13 +23,11 @@ describe('Store', () => {
   });
 
   describe('constructor', () => {
-    it('checks setTimeout', (done) => {
+    it('checks setTimeout', () => {
       store.timer = 0;
 
-      setTimeout(()=> {
-        expect(store.timer).to.equals(2);
-        done();
-      }, 1000)
+      clock.tick(1010);
+      expect(store.timer).to.equals(1);
     });
   });
 
@@ -36,6 +44,4 @@ describe('Store', () => {
     })
 
   });
-
-
 });

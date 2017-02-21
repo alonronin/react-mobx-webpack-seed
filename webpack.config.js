@@ -30,12 +30,12 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        include: resolve(__dirname, 'src'),
         loader: 'babel-loader'
       },
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        include: resolve(__dirname, 'src'),
         enforce: 'pre',
         use: [
           {
@@ -51,8 +51,14 @@ module.exports = {
       {
         test: /\.s?css$/,
         use: [
-          { loader: 'style-loader' },
-          { loader: 'css-loader?sourceMap&importLoaders=1' },
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              importLoaders: 1
+            }
+          },
           {
             loader: 'postcss-loader',
             options: {
@@ -77,12 +83,15 @@ module.exports = {
         test: /\.(woff2?|ttf|svg|eot|jpg|png|gif)?(\?.+)?$/,
         use: 'url-loader'
       },
-      { test: /\.html$/, loader: 'html-loader' }
+      {
+        test: /\.html$/,
+        loader: 'html-loader'
+      }
     ]
   },
 
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.json']
   },
 
   plugins: [

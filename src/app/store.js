@@ -12,4 +12,4 @@ class Store {
   @action resetTimer = () => { this.timer = 0; };
 }
 
-export default new Store();
+export default Store;

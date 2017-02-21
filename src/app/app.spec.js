@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import {mount} from 'enzyme';
 import {expect} from 'chai';
-import store from './store';
+import Store from './store';
 import App from './app';
 
 describe('App', (component) => {
+  let store;
 
   beforeEach (() => {
+    store = new Store();
     component = mount(<App store={store}/>);
   });
 

@@ -18,7 +18,7 @@
     "lint-fix": "npm run lint -- --fix",
     "prebuild": "npm run clean && npm run lint",
     "recommend-bump": "conventional-recommended-bump -p angular",
-    "start": "webpack-dev-server --config webpack.config.js -d --open --history-api-fallback --hot --inline --progress --colors --content-base ./dist --port 8100",
+    "start": "webpack-dev-server --config webpack.config.js -d --open --history-api-fallback --hot --hot-only --inline --progress --colors --content-base ./dist --port 8100",
     "start-autofix": "cross-env autofix='true' npm run start",
     "test": "mocha --opts mocha.opts"
   },
@@ -34,7 +34,6 @@
     "babel-polyfill": "^6.16.0",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
-    "babel-preset-react-hmre": "^1.1.1",
     "chai": "^3.5.0",
     "conventional-changelog-cli": "^1.2.0",
     "conventional-recommended-bump": "^0.3.0",
